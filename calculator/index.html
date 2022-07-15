@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        #calculator{
+            margin: 0 auto;
+            width: 350px;
+            height: auto;
+            background-color: slategray;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        #screen{
+            padding: 10px 0px 10px 0px;
+            text-align: center;
+        }
+        #result{
+            padding: 10px;
+            width: 90%;
+            border: none;
+            border-radius: 5px;
+            text-align: right;
+            font-size: 50px;
+            word-wrap: break-word;
+        }
+        #numbers{
+            text-align: center;
+        }
+        button{
+            width: 70px;
+            height: 50px;
+            margin: 4px;
+            border-radius: 5px;
+            background-color: whitesmoke;
+            border: none;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <form name="calculator"></form>
+    <div id="calculator">
+        <div id="screen">
+            <input type="text" id="result">
+            
+
+        </div>
+        <div id="numbers">
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button>+</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>-</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>/</button>
+            <button>0</button>
+            <button>.</button>
+            <button>=</button>
+            <button>*</button>
+            <button>C</button>
+            <button>√¯</button>
+            <button>X²</button>
+            <button>%</button>
+
+        </div>
+    </div>
+<script>
+    var _numbers=document.getElementsByTagName("button"), 
+    _numberLength=_numbers.length, 
+    i=0,
+    _result=document.getElementById("result");
+    _previousCalculation="";
+    
+       
+    for(i=0;i<_numberLength;i++){
+        _numbers[i].onclick=calculate;
+         
+    }
+
+    function calculate(newValue){
+        var _value = this.innerHTML;
+        if(_value== "="){
+            try{
+                _result.value=eval(_result.value);
+                
+            }catch(e) {
+                _result.value="0";
+            }
+            return;
+            
+        }else if(_value=="C"){
+            _result.value="";
+            _previousCalculation="C";
+        }
+        else if(_value=="X²"){
+            console.log('value',_result.value)
+            console.log('result',Math.pow(_result.value,2))
+            result=Math.pow(_result.value,2);
+            _result.value=result;
+            _previousCalculation="X²";
+        }
+        else if(_value=="√¯"){
+            console.log('value',_result.value)
+            console.log('result',Math.sqrt(_result.value))
+            result=Math.sqrt(_result.value);
+            _result.value=result;
+            _previousCalculation="√¯";
+        }
+        else if(_value=="%"){
+            console.log('value',_result.value)
+            console.log('result',(_result.value/100))
+            result=_result.value/100;
+            _result.value=result;
+            _previousCalculation="%";
+        }
+        else{
+            if (
+                _previousCalculation !== "C"
+                && _previousCalculation !== "X²"
+                && _previousCalculation !== "√¯"
+                && _previousCalculation !== "%"
+                && _previousCalculation !== ""
+                ) {
+                    _result.value=_value;
+                    
+                } else {
+                    _result.value+=_value;
+                }
+            
+            }
+        
+    }
+</script>
+</body>
+</html>
